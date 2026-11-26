@@ -48,8 +48,7 @@ const repairChecks = [
 function Brand() {
   return (
     <Link className="brand" href="/" aria-label="Magic TV Repairs home">
-      <Image src="/magic/mark.svg" width={48} height={48} alt="" />
-      <span><strong>Magic <span>TV</span></strong><small>ELECTRONIC REPAIRS</small></span>
+      <Image src="/magic/logo.png" width={1320} height={340} alt="" unoptimized />
     </Link>
   );
 }
@@ -73,7 +72,7 @@ export default function HomePage() {
     alternateName: site.businessName,
     description: site.description,
     url: siteUrl,
-    logo: siteUrl ? `${siteUrl}/magic/mark.svg` : undefined,
+    logo: siteUrl ? `${siteUrl}/magic/logo-circular.png` : undefined,
     image: siteUrl ? `${siteUrl}/magic/og.jpg` : undefined,
     telephone: "+27641153065",
     email: site.email,
