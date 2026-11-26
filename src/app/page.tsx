@@ -2,12 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { AudioLines, CircleHelp, Clock3, ExternalLink, House, Mail, MapPin, Menu, Monitor, Phone, Play, Plus, Quote, Wrench, Zap } from "lucide-react";
 import { PageMotion } from "@/components/ui/PageMotion";
+import { Carousel } from "@/components/ui/Carousel";
+import { FaultDemo } from "@/components/FaultDemo";
 import { RepairEnquiry } from "@/components/RepairEnquiry";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { site, siteUrl, whatsapp } from "@/config/site";
 
 const navigation = [
   { label: "Repairs", href: "#repairs" },
+  { label: "Fault guide", href: "#fault-guide" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Coverage", href: "#coverage" },
   { label: "Reviews", href: "#reviews" },
@@ -39,16 +42,10 @@ const reviewNotes = [
   { name: "Jimmy Kristopher Jelasi", initials: "JJ", note: "Reported that the TV failed again five days after the repair and that he couldn’t reach the business for follow-up.", date: "Facebook review summary", recommends: false },
 ];
 
-const repairChecks = [
-  { title: "Picture & backlight", detail: "If you can still hear sound but the screen stays dark, describe what you see at start-up." },
-  { title: "Power & start-up", detail: "Tell us whether the standby light is off, flashing or steady, and whether the TV restarts on its own." },
-  { title: "Sound & inputs", detail: "Tell us which input or app is affected, and whether the sound drops out on every source." },
-];
-
 function Brand() {
   return (
-    <Link className="brand" href="/" aria-label="Magic TV Repairs home">
-      <Image src="/magic/logo.png" width={1320} height={340} alt="" unoptimized />
+    <Link className="brand" href="/" aria-label="Magic Electronic Repairs home">
+      <Image src="/magic/logo.png" width={1422} height={324} sizes="(max-width: 760px) 222px, 254px" alt="" />
     </Link>
   );
 }
@@ -129,10 +126,10 @@ export default function HomePage() {
             <p className="eyebrow">TV repairs</p>
             <h2>What’s happening with your TV?</h2>
           </div>
-          <div className="repair-grid">
+          <Carousel label="TV repairs">
             {repairs.map(({ icon: Icon, image, title, detail }) => (
-              <article className="repair-card" data-reveal key={title}>
-                <div className="repair-image"><Image src={image} fill sizes="(max-width: 620px) 92vw, 32vw" alt="" /></div>
+              <article className="repair-card" key={title}>
+                <div className="repair-image"><Image src={image} fill sizes="(max-width: 700px) 85vw, 46vw" alt="" /></div>
                 <div className="repair-content">
                   <span className="card-icon"><Icon aria-hidden="true" /></span>
                   <h3>{title}</h3>
@@ -141,27 +138,12 @@ export default function HomePage() {
                 </div>
               </article>
             ))}
-          </div>
+          </Carousel>
           <p className="service-note"><CircleHelp aria-hidden="true" /> Cracked or shattered screens are outside our repair service.</p>
         </section>
 
-        <section className="diagnosis section" aria-labelledby="diagnosis-title">
-          <div className="wrap diagnosis-grid" data-reveal>
-            <figure className="diagnosis-photo">
-              <Image src="/images/service-qled-4k.jpg" alt="Flat-screen televisions displaying a vivid colour pattern" fill sizes="(max-width: 820px) 94vw, 52vw" />
-            </figure>
-            <div>
-              <p className="eyebrow">Before you book</p>
-              <h2 id="diagnosis-title">Describe the fault.</h2>
-              <p className="lede">A TV model and a few details about the symptoms help us discuss the right next step.</p>
-              <ul className="diagnosis-list">
-                {repairChecks.map(({ title, detail }) => (
-                  <li key={title}><span aria-hidden="true" /><div><h3>{title}</h3><p>{detail}</p></div></li>
-                ))}
-              </ul>
-              <a className="button primary" href="#repair-enquiry">Start a repair enquiry</a>
-            </div>
-          </div>
+        <section id="fault-guide" tabIndex={-1} className="diagnosis section" aria-labelledby="diagnosis-title">
+          <FaultDemo />
         </section>
 
         <section id="how-it-works" tabIndex={-1} className="process section">
@@ -194,7 +176,7 @@ export default function HomePage() {
               <p>Recommend Magic TV Repairs<br /><small>Facebook snapshot · 7 reviews</small></p>
               <a className="button outline" href={site.reviews}><Image src="/magic/facebook.svg" width={20} height={20} alt="" />Read all Facebook reviews</a>
             </div>
-            <div className="review-grid">
+            <Carousel label="Facebook reviews">
               {reviewNotes.map(({ name, initials, note, date, recommends }) => (
                 <figure className="review-card" key={name}>
                   <div className="review-card-top">
@@ -205,7 +187,7 @@ export default function HomePage() {
                   <figcaption><span className="review-avatar" aria-hidden="true">{initials}</span><div><strong>{name}</strong><span>{date}</span></div></figcaption>
                 </figure>
               ))}
-            </div>
+            </Carousel>
           </div>
         </section>
 
